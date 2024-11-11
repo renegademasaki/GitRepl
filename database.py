@@ -4,7 +4,7 @@ def join():
     conn = sqlite3.connect('mydatabase.db')
     c = conn.cursor()
 
-    c.execute("SELECT users.id, users.name, users.age, users.gender, user_occupations.occupation FROM users JOIN user_occupations ON users.name = user_occupations.name")
+    c.execute("SELECT users.id, users.name, users.age, users.gender, user_occupations.occupation FROM users JOIN user_occupations ON users.id = user_occupations.id")
 
     # Fetch the results
     rows = c.fetchall()
