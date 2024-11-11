@@ -26,7 +26,8 @@ def alter_table():
     c = conn.cursor()
 
     # Alter the table
-    c.execute("ALTER TABLE users ADD COLUMN occupation TEXT")
+    #c.execute("ALTER TABLE users ADD COLUMN occupation TEXT")
+    c.execute("ALTER TABLE users DROP COLUMN occupation")
 
     # Commit the changes
     conn.commit()
@@ -49,8 +50,8 @@ def delete_user():
     c = conn.cursor()
 
     # Delete the user from the database
-    c.execute("DELETE FROM users WHERE id >= 1")
-    c.execute("DELETE FROM user_occupations WHERE id >= 1")
+    c.execute("DELETE FROM users WHERE id > 0")
+    c.execute("DELETE FROM user_occupations WHERE id > 0")
 
     # Commit the changes
     conn.commit()
@@ -64,6 +65,7 @@ def create_user():
     c.execute("INSERT INTO users (name, age, gender) VALUES (?, ?, ?)", ('Alice', 30, 'female'))
     c.execute("INSERT INTO users (name, age, gender) VALUES (?, ?, ?)", ('Bob', 25, 'male'))
     c.execute("INSERT INTO users (name, age, gender) VALUES (?, ?, ?)", ('Charlie', 35, 'male'))
+    c.execute("INSERT INTO users (name, age, gender) VALUES (?, ?, ?)", ('Nikko', 42, 'male'))
 
     conn.commit()
     conn.close()
@@ -74,6 +76,7 @@ def create_occupation():
     c.execute("INSERT INTO user_occupations (name, occupation) VALUES (?, ?)", ('Alice', 'Software Engineer'))
     c.execute("INSERT INTO user_occupations (name, occupation) VALUES (?, ?)", ('Bob', 'Data Scientist'))
     c.execute("INSERT INTO user_occupations (name, occupation) VALUES (?, ?)", ('Charlie', 'Marketing Manager'))
+    c.execute("INSERT INTO user_occupations (name, occupation) VALUES (?, ?)", ('Nikko', 'Freelancer'))
 
     conn.commit()
     conn.close()
