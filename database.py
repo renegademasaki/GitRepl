@@ -1,5 +1,23 @@
 import sqlite3
 
+def join():
+    conn = sqlite3.connect('mydatabase.db')
+    c = conn.cursor()
+
+    c.execute("SELECT users.id, users.name, users.age, users.gender, user_occupations.occupation FROM users JOIN user_occupations ON users.name = user_occupations.name")
+
+    # Fetch the results
+    rows = c.fetchall()
+    
+    # Print the results
+    print("JOINed users and user_occupations tables:")
+    
+    for row in rows:
+        print(row)
+
+    conn.commit()
+    conn.close()
+
 def alter_table():
     # Connect to the database
     conn = sqlite3.connect('mydatabase.db')
@@ -31,7 +49,8 @@ def delete_user():
     c = conn.cursor()
 
     # Delete the user from the database
-    c.execute("DELETE FROM users WHERE id > 5")
+    c.execute("DELETE FROM users WHERE id >= 1")
+    c.execute("DELETE FROM user_occupations WHERE id >= 1")
 
     # Commit the changes
     conn.commit()
@@ -68,8 +87,22 @@ def print_database():
 
     rows = c.fetchall()
 
+    print("users table:")
+    
     for row in rows:
         print(row)
+
+    print("---")
+
+    c.execute("SELECT * FROM user_occupations")
+    rows = c.fetchall()
+
+    print("user_occupations table:")
+    
+    for row in rows:
+        print(row)
+
+    print("---")
 
     conn.close()
 
@@ -101,3 +134,4 @@ def create_database():
     conn.close()
 
     print("SQLite database created successfully!")
+    print("---")
