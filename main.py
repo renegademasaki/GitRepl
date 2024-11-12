@@ -1,13 +1,13 @@
 import database
 
-database.delete_user()
+#database.delete_user()
 
 # Create the database if it doesn't exist
 database.create_database()
 
-database.create_user()
+#database.create_user()
 
-database.create_occupation()
+#database.create_occupation()
 
 #database.alter_table()
 
